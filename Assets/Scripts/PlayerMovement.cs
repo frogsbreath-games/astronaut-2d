@@ -6,7 +6,9 @@ public enum PlayerState
 {
     walk,
     attack,
-    interact
+    interact,
+    stagger,
+    idle
 }
 
 public class PlayerMovement : MonoBehaviour
@@ -34,10 +36,10 @@ public class PlayerMovement : MonoBehaviour
         Change = Vector3.zero;
         Change.x = Input.GetAxisRaw("Horizontal");
         Change.y = Input.GetAxisRaw("Vertical");
-        if (Input.GetButtonDown("Attack") && PlayerState != PlayerState.attack)
+        if (Input.GetButtonDown("Attack") && PlayerState != PlayerState.attack && PlayerState != PlayerState.stagger)
         {
             StartCoroutine(AttackCoroutine());
-        } else if (PlayerState == PlayerState.walk)
+        } else if (PlayerState == PlayerState.walk || PlayerState == PlayerState.idle)
         {
             MoveAndAnimatePlayer();
         }
@@ -47,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Change != Vector3.zero)
         {
+            PlayerState = PlayerState.walk;
             MovePlayer();
             Animator.SetFloat("MoveX", Change.x);
             Animator.SetFloat("MoveY", Change.y);
@@ -54,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            PlayerState = PlayerState.idle;
             Animator.SetBool("Moving", false);
         }
     }
@@ -74,5 +78,20 @@ public class PlayerMovement : MonoBehaviour
         Player.MovePosition(
             transform.position + Change * Speed * Time.deltaTime
             );
+    }
+
+    public void Knockback(float knockbackTime)
+    {
+        StartCoroutine(KnockbackTimeout(knockbackTime));
+    }
+
+    IEnumerator KnockbackTimeout(float knockbackTime)
+    {
+        if (Player != null)
+        {
+            yield return new WaitForSeconds(knockbackTime);
+            PlayerState = PlayerState.idle;
+            Player.velocity = Vector2.zero;
+        }
     }
 }

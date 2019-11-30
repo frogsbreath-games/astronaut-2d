@@ -260,10 +260,10 @@ GameObject:
   m_Component:
   - component: {fileID: 271509453}
   - component: {fileID: 271509454}
-  - component: {fileID: 271509455}
+  - component: {fileID: 271509456}
   m_Layer: 0
   m_Name: FrontHitBox
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -316,7 +316,7 @@ PolygonCollider2D:
       - {x: 0.3590932, y: -0.38698673}
       - {x: 0.6536107, y: -0.562673}
       - {x: 0.82791567, y: -1.3615193}
---- !u!114 &271509455
+--- !u!114 &271509456
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -325,9 +325,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 271509452}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a130af84bfa75164681218b65b16ea81, type: 3}
+  m_Script: {fileID: 11500000, guid: 81e3a99f89de41b448c6997b704e3b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Thrust: 8
+  KnockbackTime: 0.2
 --- !u!1 &344381568
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,10 +340,10 @@ GameObject:
   m_Component:
   - component: {fileID: 344381569}
   - component: {fileID: 344381570}
-  - component: {fileID: 344381571}
+  - component: {fileID: 344381572}
   m_Layer: 0
   m_Name: BackHitBox
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -391,7 +393,7 @@ PolygonCollider2D:
       - {x: 0.8885381, y: -0.29895782}
       - {x: 1.221087, y: 0.07021277}
       - {x: 0.7399564, y: 1.1354923}
---- !u!114 &344381571
+--- !u!114 &344381572
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -400,9 +402,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 344381568}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a130af84bfa75164681218b65b16ea81, type: 3}
+  m_Script: {fileID: 11500000, guid: 81e3a99f89de41b448c6997b704e3b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Thrust: 8
+  KnockbackTime: 0.2
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3340,20 +3344,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1079220910
-MonoBehaviour:
+--- !u!61 &1079220910
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079220903}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81e3a99f89de41b448c6997b704e3b08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Thrust: 5
-  KnockbackTime: 0.3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.014272451, y: -0.033288598}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.375, y: 2}
+    newSize: {x: 1.375, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.7945895, y: 1.7622244}
+  m_EdgeRadius: 0
 --- !u!1 &1079346390
 GameObject:
   m_ObjectHideFlags: 0
@@ -12626,6 +12642,8 @@ GameObject:
   - component: {fileID: 1444284979}
   - component: {fileID: 1444284978}
   - component: {fileID: 1444284980}
+  - component: {fileID: 1444284981}
+  - component: {fileID: 1444284982}
   m_Layer: 0
   m_Name: Ooze
   m_TagString: Enemy
@@ -12748,7 +12766,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1444284974}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -12758,7 +12776,7 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!114 &1444284980
@@ -12773,14 +12791,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e34b471026ec32640a555873a36fcf84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyState: 0
   BaseHealth: 10
   BaseDamage: 1
   EnemyName: Ooze
-  MovementSpeed: 1
+  MovementSpeed: 1.5
+  Rigidbody2D: {fileID: 0}
   Target: {fileID: 1079220905}
   ChaseRadius: 5
-  AttackRadius: 1.5
+  AttackRadius: 1.2
   HomePosition: {fileID: 0}
+--- !u!61 &1444284981
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444284974}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.10879159}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.1688852, y: 1.7824168}
+  m_EdgeRadius: 0
+--- !u!114 &1444284982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444284974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81e3a99f89de41b448c6997b704e3b08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Thrust: 2
+  KnockbackTime: 0.2
 --- !u!1 &1569784954
 GameObject:
   m_ObjectHideFlags: 0
@@ -12791,10 +12851,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1569784955}
   - component: {fileID: 1569784956}
-  - component: {fileID: 1569784957}
+  - component: {fileID: 1569784958}
   m_Layer: 0
   m_Name: LeftHitBox
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12849,7 +12909,7 @@ PolygonCollider2D:
       - {x: -0.22143316, y: 0.14055113}
       - {x: -0.22597504, y: -0.351658}
       - {x: -0.43868828, y: -0.9219045}
---- !u!114 &1569784957
+--- !u!114 &1569784958
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12858,9 +12918,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1569784954}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a130af84bfa75164681218b65b16ea81, type: 3}
+  m_Script: {fileID: 11500000, guid: 81e3a99f89de41b448c6997b704e3b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Thrust: 8
+  KnockbackTime: 0.2
 --- !u!1 &1868533568
 GameObject:
   m_ObjectHideFlags: 0
@@ -12916,10 +12978,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2100161697}
   - component: {fileID: 2100161698}
-  - component: {fileID: 2100161699}
+  - component: {fileID: 2100161700}
   m_Layer: 0
   m_Name: RightHitBox
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12970,7 +13032,7 @@ PolygonCollider2D:
       - {x: 1.3062975, y: -0.8993341}
       - {x: 1.478642, y: -0.46746314}
       - {x: 1.3168972, y: 0.3942274}
---- !u!114 &2100161699
+--- !u!114 &2100161700
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12979,9 +13041,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2100161696}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a130af84bfa75164681218b65b16ea81, type: 3}
+  m_Script: {fileID: 11500000, guid: 81e3a99f89de41b448c6997b704e3b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Thrust: 8
+  KnockbackTime: 0.2
 --- !u!1001 &5745250051935859507
 PrefabInstance:
   m_ObjectHideFlags: 0

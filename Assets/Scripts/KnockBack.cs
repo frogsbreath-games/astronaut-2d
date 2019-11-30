@@ -20,16 +20,30 @@ public class KnockBack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.CompareTag("Hittable") && this.gameObject.CompareTag("Player"))
         {
-            Rigidbody2D enemy = collision.GetComponent<Rigidbody2D>();
-            if (enemy != null)
+            collision.GetComponent<EggBehavior>().Burst();
+        }
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player"))
+        {
+            Rigidbody2D hitTarget = collision.GetComponent<Rigidbody2D>();
+            if (hitTarget != null)
             {
-                enemy.isKinematic = false;
-                Vector2 difference = enemy.transform.position - transform.position;
+                Vector2 difference = hitTarget.transform.position - transform.position;
                 difference = difference.normalized * Thrust;
-                enemy.AddForce(difference, ForceMode2D.Impulse);
-                StartCoroutine(KnockbackTimeout(enemy));
+                hitTarget.AddForce(difference, ForceMode2D.Impulse);
+
+                if (collision.gameObject.CompareTag("Enemy"))
+                {
+                    hitTarget.GetComponent<EnemyBehavior>().EnemyState = EnemyState.stagger;
+                    collision.GetComponent<EnemyBehavior>().Knockback(hitTarget, KnockbackTime);
+                }
+                if (collision.gameObject.CompareTag("Player"))
+                {
+                    hitTarget.GetComponent<PlayerMovement>().PlayerState = PlayerState.stagger;
+                    collision.GetComponent<PlayerMovement>().Knockback(KnockbackTime);
+                }
+                
             }
         }
     }
@@ -40,7 +54,6 @@ public class KnockBack : MonoBehaviour
         {
             yield return new WaitForSeconds(KnockbackTime);
             rigidbody.velocity = Vector2.zero;
-            rigidbody.isKinematic = true;
         }
     }
 }
