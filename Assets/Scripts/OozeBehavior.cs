@@ -41,7 +41,8 @@ public class OozeBehavior : EnemyBehavior
                 ChangeAnimation(tempPosition - Target.position);
                 Rigidbody2D.MovePosition(tempPosition);
             }
-        } else
+        } else if(Vector3.Distance(Target.position
+            , transform.position) > ChaseRadius)
         {
             Animator.SetBool("Alert", false);
         }
