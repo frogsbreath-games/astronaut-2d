@@ -38,12 +38,46 @@ public class OozeBehavior : EnemyBehavior
                 ChangeState(EnemyState.walk);
                 Animator.SetBool("Alert", true);
                 Vector3 tempPosition = Vector3.MoveTowards(transform.position, Target.position, MovementSpeed * Time.deltaTime);
+                ChangeAnimation(tempPosition - Target.position);
                 Rigidbody2D.MovePosition(tempPosition);
             }
         } else
         {
             Animator.SetBool("Alert", false);
         }
+    }
+
+    private void ChangeAnimation(Vector2 direction)
+    {
+        if(Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+        {
+            if(direction.x > 0)
+            {
+                SetAnimationFloat(Vector2.left);
+            }
+            else if (direction.x < 0)
+            {
+                SetAnimationFloat(Vector2.right);
+
+            }
+        } else if (Mathf.Abs(direction.y) > Mathf.Abs(direction.x))
+        {
+            if (direction.y > 0)
+            {
+                SetAnimationFloat(Vector2.down);
+
+            }
+            else if (direction.y < 0)
+            {
+                SetAnimationFloat(Vector2.up);
+            }
+        }
+    }
+
+    private void SetAnimationFloat(Vector2 direction)
+    {
+        Animator.SetFloat("MoveX", direction.x);
+        Animator.SetFloat("MoveY", direction.y);
     }
 
     void ChangeState(EnemyState state)
