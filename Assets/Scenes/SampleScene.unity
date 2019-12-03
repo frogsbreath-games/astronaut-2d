@@ -330,6 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Thrust: 8
   KnockbackTime: 0.2
+  Damage: 1
 --- !u!1 &344381568
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,11 +388,16 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.2814679, y: 1.5099531}
+    - - {x: 0.5625844, y: 1.3906614}
+      - {x: 0.3574214, y: 1.4655114}
+      - {x: -0.26528645, y: 1.6069976}
+      - {x: -0.66159344, y: 1.5409381}
       - {x: -0.7927308, y: 1.1354928}
       - {x: 0.22143316, y: -0.08804883}
       - {x: 0.8885381, y: -0.29895782}
-      - {x: 1.221087, y: 0.07021277}
+      - {x: 1.026912, y: 0.15108316}
+      - {x: 0.9783685, y: 0.5069133}
+      - {x: 0.8636904, y: 0.9799132}
       - {x: 0.7399564, y: 1.1354923}
 --- !u!114 &344381572
 MonoBehaviour:
@@ -407,6 +413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Thrust: 8
   KnockbackTime: 0.2
+  Damage: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3235,7 +3242,7 @@ SpriteRenderer:
   m_SortingLayerID: -146826779
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a8793628e60b8b14ab6aae4df6c5c512, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3770d34721950b4eb1e520c29f7a571, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3302,7 +3309,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.375, y: 2}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1.375, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3357,18 +3364,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.014272451, y: -0.033288598}
+  m_Offset: {x: -0.0013313293, y: 0.013503432}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.375, y: 2}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1.375, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7945895, y: 1.7622244}
+  m_Size: {x: 0.9506264, y: 1.6686404}
   m_EdgeRadius: 0
 --- !u!1 &1079346390
 GameObject:
@@ -12840,7 +12847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyState: 0
-  BaseHealth: 0
+  Health: 0
   BaseDamage: 1
   EnemyName: Ooze
   MovementSpeed: 1.5
@@ -12863,7 +12870,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.10879159}
+  m_Offset: {x: 0, y: -0.038603544}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -12874,7 +12881,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1688852, y: 1.7824168}
+  m_Size: {x: 1.1688852, y: 1.5796514}
   m_EdgeRadius: 0
 --- !u!114 &1444284982
 MonoBehaviour:
@@ -12890,6 +12897,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Thrust: 4
   KnockbackTime: 0.2
+  Damage: 0
 --- !u!1 &1569784954
 GameObject:
   m_ObjectHideFlags: 0
@@ -12949,15 +12957,15 @@ PolygonCollider2D:
     m_Paths:
     - - {x: -0.6286144, y: -1.017142}
       - {x: -0.7388511, y: -1.1101513}
-      - {x: -1.1855049, y: -0.96249247}
-      - {x: -1.408442, y: -0.34161294}
-      - {x: -1.4344182, y: -0.0009536892}
+      - {x: -1.3149548, y: -0.86544764}
+      - {x: -1.5217109, y: -0.3739611}
+      - {x: -1.5315061, y: 0.0799167}
       - {x: -1.2914529, y: 0.50982744}
       - {x: -0.834497, y: 0.7384271}
-      - {x: -0.4959283, y: 0.6175839}
-      - {x: -0.22143316, y: 0.14055113}
-      - {x: -0.22597504, y: -0.351658}
-      - {x: -0.43868828, y: -0.9219045}
+      - {x: -0.62537813, y: 0.55288756}
+      - {x: -0.43178892, y: 0.12437694}
+      - {x: -0.40396833, y: -0.46487665}
+      - {x: -0.4225068, y: -0.74398965}
 --- !u!114 &1569784958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12972,6 +12980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Thrust: 8
   KnockbackTime: 0.2
+  Damage: 1
 --- !u!1 &1868533568
 GameObject:
   m_ObjectHideFlags: 0
@@ -13074,13 +13083,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.86199427, y: 0.5373677}
+    - - {x: 0.81345034, y: 0.6667604}
       - {x: 0.45628023, y: 0.4145245}
       - {x: 0.5029006, y: -0.84418607}
       - {x: 0.81857586, y: -1.0563288}
       - {x: 1.3062975, y: -0.8993341}
       - {x: 1.478642, y: -0.46746314}
-      - {x: 1.3168972, y: 0.3942274}
+      - {x: 1.4818575, y: -0.048232988}
+      - {x: 1.1712658, y: 0.6368388}
 --- !u!114 &2100161700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13095,6 +13105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Thrust: 8
   KnockbackTime: 0.2
+  Damage: 1
 --- !u!1001 &5745250051935859507
 PrefabInstance:
   m_ObjectHideFlags: 0
