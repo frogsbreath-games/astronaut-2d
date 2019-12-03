@@ -13,7 +13,7 @@ public enum EnemyState
 public class EnemyBehavior : MonoBehaviour
 {
     public EnemyState EnemyState;
-    public float BaseHealth;
+    public float Health;
     public int BaseDamage;
     public string EnemyName;
     public float MovementSpeed;
@@ -29,8 +29,18 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    public void Knockback(Rigidbody2D rigidbody, float knockbackTime)
+    public void Knockback(Rigidbody2D rigidbody, float knockbackTime, float damage)
     {
         StartCoroutine(KnockbackTimeout(rigidbody, knockbackTime));
+        RecieveDamage(damage);
+    }
+
+    public void RecieveDamage(float damage)
+    {
+        Health -= damage;
+        if(Health <= 0)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 }
