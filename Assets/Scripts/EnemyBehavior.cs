@@ -13,10 +13,11 @@ public enum EnemyState
 public class EnemyBehavior : MonoBehaviour
 {
     public EnemyState EnemyState;
-    public int BaseHealth;
+    public float BaseHealth;
     public int BaseDamage;
     public string EnemyName;
     public float MovementSpeed;
+    public FloatValue MaxHealth;
 
     IEnumerator KnockbackTimeout(Rigidbody2D rigidbody, float knockbackTime)
     {

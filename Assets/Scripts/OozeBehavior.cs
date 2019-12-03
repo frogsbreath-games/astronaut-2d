@@ -18,6 +18,7 @@ public class OozeBehavior : EnemyBehavior
         Target = GameObject.FindWithTag("Player").transform;
         Animator = GetComponent<Animator>();
         Rigidbody2D = GetComponent<Rigidbody2D>();
+        BaseHealth = MaxHealth.InitialValue;
     }
 
     // Update is called once per frame
