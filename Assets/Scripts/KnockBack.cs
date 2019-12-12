@@ -39,7 +39,7 @@ public class KnockBack : MonoBehaviour
                     hitTarget.GetComponent<EnemyBehavior>().EnemyState = EnemyState.stagger;
                     collision.GetComponent<EnemyBehavior>().Knockback(hitTarget, KnockbackTime, Damage);
                 }
-                if (collision.gameObject.CompareTag("Player"))
+                if (collision.gameObject.CompareTag("Player") && collision.isTrigger)
                 {
                     if (collision.GetComponent<PlayerMovement>().PlayerState != PlayerState.stagger)
                     {
