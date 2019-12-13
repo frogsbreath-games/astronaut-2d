@@ -92,6 +92,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            TextOverlayManager overlayManager = GameObject.FindWithTag("OverlayManager").GetComponent<TextOverlayManager>();
+            StartCoroutine(overlayManager.DisplayTextOverlay("Game Over", 4f));
             this.gameObject.SetActive(false);
         }
     }
