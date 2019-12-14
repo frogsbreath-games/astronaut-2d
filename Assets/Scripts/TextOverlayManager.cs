@@ -10,6 +10,7 @@ public class TextOverlayManager : MonoBehaviour
 
     public IEnumerator DisplayTextOverlay(string TextName, float timeDisplayed)
     {
+        //TODO Make Settings script to manage managers
         MainOverlayTextObject.SetActive(true);
         OverlayText.text = TextName;
         yield return new WaitForSeconds(timeDisplayed);

@@ -92,9 +92,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            TextOverlayManager overlayManager = GameObject.FindWithTag("OverlayManager").GetComponent<TextOverlayManager>();
+            TextOverlayManager overlayManager = FindObjectOfType<TextOverlayManager>();
             StartCoroutine(overlayManager.DisplayTextOverlay("Game Over", 4f));
-            this.gameObject.SetActive(false);
+            //TODO Death Animation
+            //this.gameObject.SetActive(false);
         }
     }
 
