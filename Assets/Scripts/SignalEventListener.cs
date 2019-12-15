@@ -20,6 +20,6 @@ public class SignalEventListener : MonoBehaviour
 
     private void OnDisable()
     {
-        Signal.RegisterListener(this);
+        Signal.RemoveListener(this);
     }
 }

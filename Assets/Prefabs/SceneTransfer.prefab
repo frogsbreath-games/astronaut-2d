@@ -71,3 +71,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneToLoadName: SampleScene
+  PlayerStoredLocation: {fileID: 11400000, guid: d05e0293bee01624595c8ba670c72706,
+    type: 2}
+  LoadPosition: {x: 0, y: 0}
