@@ -32,8 +32,8 @@ public class HealthManager : MonoBehaviour
 
     public void UpdateCells()
     {
-        float health = PlayerCurrentHealth.RuntimeValue;
-        for (int i = 0; i < HealthCells.RuntimeValue; i++)
+        float health = PlayerCurrentHealth.Value;
+        for (int i = 0; i < HealthCells.Value; i++)
         {
             if (i >= health)
             {
