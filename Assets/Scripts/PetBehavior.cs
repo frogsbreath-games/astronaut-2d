@@ -2,48 +2,58 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OozeBehavior : EnemyBehavior
+public enum PetState
 {
+    idle,
+    walk,
+    attack
+}
+
+public class PetBehavior : MonoBehaviour
+{
+
     public Rigidbody2D Rigidbody2D;
     public Transform Target;
     public float ChaseRadius;
     public float AttackRadius;
     public Transform HomePosition;
     private Animator Animator;
-
+    private PetState PetState;
+    public float MovementSpeed;
     // Start is called before the first frame update
     void Start()
     {
-        EnemyState = EnemyState.idle;
+        PetState = PetState.idle;
         Target = GameObject.FindWithTag("Player").transform;
         Animator = GetComponent<Animator>();
         Rigidbody2D = GetComponent<Rigidbody2D>();
-        Health = MaxHealth.InitialValue;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         CheckDistance();
     }
 
     void CheckDistance()
     {
-        if(Vector3.Distance(Target.position
-            , transform.position) <= ChaseRadius 
+        if (Vector3.Distance(Target.position
+            , transform.position) <= ChaseRadius
             && Vector3.Distance(Target.position
             , transform.position) > AttackRadius)
         {
-            if ((EnemyState == EnemyState.idle || EnemyState == EnemyState.walk) && EnemyState != EnemyState.stagger    )
+            if (PetState == PetState.idle || PetState == PetState.walk)
             {
-                ChangeState(EnemyState.walk);
+                ChangeState(PetState.walk);
                 Animator.SetBool("Moving", true);
                 Vector3 tempPosition = Vector3.MoveTowards(transform.position, Target.position, MovementSpeed * Time.deltaTime);
                 ChangeAnimation(tempPosition - Target.position);
                 Rigidbody2D.MovePosition(tempPosition);
             }
-        } else if(Vector3.Distance(Target.position
-            , transform.position) > ChaseRadius)
+        }
+        else if (Vector3.Distance(Target.position
+          , transform.position) > ChaseRadius || Vector3.Distance(Target.position
+          , transform.position) < AttackRadius)
         {
             Animator.SetBool("Moving", false);
         }
@@ -51,9 +61,9 @@ public class OozeBehavior : EnemyBehavior
 
     private void ChangeAnimation(Vector2 direction)
     {
-        if(Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
         {
-            if(direction.x > 0)
+            if (direction.x > 0)
             {
                 SetAnimationFloat(Vector2.left);
             }
@@ -62,7 +72,8 @@ public class OozeBehavior : EnemyBehavior
                 SetAnimationFloat(Vector2.right);
 
             }
-        } else if (Mathf.Abs(direction.y) > Mathf.Abs(direction.x))
+        }
+        else if (Mathf.Abs(direction.y) > Mathf.Abs(direction.x))
         {
             if (direction.y > 0)
             {
@@ -82,11 +93,11 @@ public class OozeBehavior : EnemyBehavior
         Animator.SetFloat("MoveY", direction.y);
     }
 
-    void ChangeState(EnemyState state)
+    void ChangeState(PetState state)
     {
-        if(EnemyState != state)
+        if (PetState != state)
         {
-            EnemyState = state;
+            PetState = state;
         }
     }
 }
