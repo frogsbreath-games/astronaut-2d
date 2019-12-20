@@ -56,6 +56,7 @@ public class PetBehavior : MonoBehaviour
           , transform.position) < AttackRadius)
         {
             Animator.SetBool("Moving", false);
+            Rigidbody2D.velocity = Vector3.zero;
         }
     }
 
