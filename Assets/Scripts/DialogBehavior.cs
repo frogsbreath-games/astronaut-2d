@@ -9,6 +9,8 @@ public class DialogBehavior : MonoBehaviour
     public Text DialogText;
     public string Text;
     public bool PlayerCanInteract;
+    public SignalEvent QuestionOn;
+    public SignalEvent QuestionOff;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,7 @@ public class DialogBehavior : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             PlayerCanInteract = true;
+            QuestionOn.Raise();
         }
     }
 
@@ -46,6 +49,7 @@ public class DialogBehavior : MonoBehaviour
         {
             PlayerCanInteract = false;
             Dialog.SetActive(false);
+            QuestionOff.Raise();
         }
     }
 }
