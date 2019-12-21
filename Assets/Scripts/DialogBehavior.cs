@@ -30,6 +30,7 @@ public class DialogBehavior : MonoBehaviour
             {
                 Dialog.SetActive(true);
                 DialogText.text = Text;
+                QuestionOff.Raise();
             }
         }
     }
@@ -39,7 +40,10 @@ public class DialogBehavior : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             PlayerCanInteract = true;
-            QuestionOn.Raise();
+            if (!Dialog.activeInHierarchy)
+            {
+                QuestionOn.Raise();
+            }
         }
     }
 
