@@ -20,7 +20,6 @@ public class EnemyBehavior : MonoBehaviour
     public FloatValue MaxHealth;
     public HealthBarManager HealthBarManager;
 
-
     IEnumerator KnockbackTimeout(Rigidbody2D rigidbody, float knockbackTime)
     {
         if (rigidbody != null)
@@ -40,15 +39,16 @@ public class EnemyBehavior : MonoBehaviour
     public void RecieveDamage(float damage)
     {
         Health -= damage;
-        UpdateHeathBar(Health/MaxHealth.InitialValue);
+        HealthBarManager.SetHealthBarSize(Health / MaxHealth.InitialValue);
+
+        if(Health/MaxHealth.InitialValue < .5f)
+        {
+            HealthBarManager.SetHealthBarColor(Color.red);
+        }
+
         if(Health <= 0)
         {
             this.gameObject.SetActive(false);
         }
-    }
-
-    void UpdateHeathBar(float health)
-    {
-        HealthBarManager.SetHealthBarSize(health);
     }
 }
