@@ -18,6 +18,8 @@ public class EnemyBehavior : MonoBehaviour
     public string EnemyName;
     public float MovementSpeed;
     public FloatValue MaxHealth;
+    public HealthBarManager HealthBarManager;
+
 
     IEnumerator KnockbackTimeout(Rigidbody2D rigidbody, float knockbackTime)
     {
@@ -38,9 +40,15 @@ public class EnemyBehavior : MonoBehaviour
     public void RecieveDamage(float damage)
     {
         Health -= damage;
+        UpdateHeathBar(Health/MaxHealth.InitialValue);
         if(Health <= 0)
         {
             this.gameObject.SetActive(false);
         }
+    }
+
+    void UpdateHeathBar(float health)
+    {
+        HealthBarManager.SetHealthBarSize(health);
     }
 }

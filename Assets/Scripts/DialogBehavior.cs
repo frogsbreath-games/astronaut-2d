@@ -37,7 +37,7 @@ public class DialogBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && collision.isTrigger)
         {
             PlayerCanInteract = true;
             if (!Dialog.activeInHierarchy)
@@ -49,7 +49,7 @@ public class DialogBehavior : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && collision.isTrigger)
         {
             PlayerCanInteract = false;
             Dialog.SetActive(false);

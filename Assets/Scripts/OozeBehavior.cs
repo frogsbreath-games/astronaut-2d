@@ -19,6 +19,7 @@ public class OozeBehavior : EnemyBehavior
         Animator = GetComponent<Animator>();
         Rigidbody2D = GetComponent<Rigidbody2D>();
         Health = MaxHealth.InitialValue;
+        HealthBarManager = transform.Find("HealthBar").GetComponent<HealthBarManager>();
     }
 
     // Update is called once per frame
@@ -89,4 +90,5 @@ public class OozeBehavior : EnemyBehavior
             EnemyState = state;
         }
     }
+
 }
