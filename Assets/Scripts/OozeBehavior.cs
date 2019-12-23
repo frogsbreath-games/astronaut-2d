@@ -26,6 +26,15 @@ public class OozeBehavior : EnemyBehavior
     void FixedUpdate()
     {
         CheckDistance();
+        if(EnemyState == EnemyState.idle)
+        {
+            HealthBarManager.gameObject.SetActive(false);
+        }
+        else
+        {
+            HealthBarManager.gameObject.SetActive(true);
+            HealthBarManager.SetHealthBarSize(Health / MaxHealth.InitialValue);
+        }
     }
 
     void CheckDistance()
@@ -35,7 +44,7 @@ public class OozeBehavior : EnemyBehavior
             && Vector3.Distance(Target.position
             , transform.position) > AttackRadius)
         {
-            if ((EnemyState == EnemyState.idle || EnemyState == EnemyState.walk) && EnemyState != EnemyState.stagger    )
+            if ((EnemyState == EnemyState.idle || EnemyState == EnemyState.walk) && EnemyState != EnemyState.stagger)
             {
                 ChangeState(EnemyState.walk);
                 Animator.SetBool("Moving", true);
@@ -46,6 +55,7 @@ public class OozeBehavior : EnemyBehavior
         } else if(Vector3.Distance(Target.position
             , transform.position) > ChaseRadius)
         {
+            ChangeState(EnemyState.idle);
             Animator.SetBool("Moving", false);
         }
     }
